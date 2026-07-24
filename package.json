@@ -1,14 +1,25 @@
 {
   "name": "playground",
   "version": "1.0.0",
-  "description": "Node.js application",
+  "description": "Node.js application with Rollup bundler, Bootstrap, and Tailwind CSS",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "build": "rollup -c",
+    "watch": "rollup -c -w"
   },
-  "keywords": [],
+  "keywords": ["node", "express", "rollup", "bootstrap", "tailwind"],
   "author": "",
   "license": "ISC",
-  "dependencies": {}
+  "dependencies": {
+    "bootstrap": "^5.3.0",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "rollup": "^3.29.0",
+    "tailwindcss": "^3.3.0"
+  }
 }
