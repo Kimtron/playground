@@ -1,7 +1,9 @@
-// Main JavaScript utilities and Bootstrap initialization
+// BonBon - Master JavaScript Utilities
+// Bootstrap + Tailwind + Vite/Rollup Super Library
+// Created by Kimberley Hale
 
-// Bootstrap Utilities
-const BSUtils = {
+const BonBonUtils = {
+  // Bootstrap utilities
   initTooltips() {
     const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
     return tooltipTriggerList.map(el => new bootstrap.Tooltip(el));
@@ -10,6 +12,15 @@ const BSUtils = {
   initPopovers() {
     const popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
     return popoverTriggerList.map(el => new bootstrap.Popover(el));
+  },
+
+  // Vite dev server detection
+  isDevServer() {
+    return import.meta.env.DEV;
+  },
+
+  getMode() {
+    return import.meta.env.MODE;
   }
 };
 
@@ -48,11 +59,11 @@ function handleContactForm() {
         
         const result = await response.json();
         if (result.success) {
-          alert('Message sent successfully!');
+          alert('✨ Message sent by BonBon!');
           form.reset();
         }
       } catch (error) {
-        console.error('Error sending message:', error);
+        console.error('BonBon Error:', error);
         alert('Error sending message. Please try again.');
       }
     });
@@ -61,14 +72,15 @@ function handleContactForm() {
 
 // Initialize on DOM ready
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('🎨 Initializing Playground...');
+  console.log('🍭 BonBon Initializing...');
+  console.log(`📦 Mode: ${BonBonUtils.getMode()}`);
   
-  BSUtils.initTooltips();
-  BSUtils.initPopovers();
+  BonBonUtils.initTooltips();
+  BonBonUtils.initPopovers();
   initSmoothScroll();
   handleContactForm();
   
-  console.log('✅ Playground fully loaded!');
+  console.log('✅ BonBon fully loaded!');
 });
 
-export { BSUtils, initSmoothScroll, handleContactForm };
+export { BonBonUtils, initSmoothScroll, handleContactForm };

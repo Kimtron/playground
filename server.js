@@ -7,6 +7,7 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'dist')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -16,13 +17,19 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'Server is running', timestamp: new Date() });
+  res.json({ 
+    status: 'BonBon server running', 
+    project: 'BonBon by Kimberley Hale',
+    bundler: 'Vite (with Rollup fallback)',
+    concept: 'Where the treat is both, and one is the fallback',
+    timestamp: new Date() 
+  });
 });
 
 app.post('/api/contact', (req, res) => {
   const { name, email, message } = req.body;
   console.log('Contact form submission:', { name, email, message });
-  res.json({ success: true, message: 'Message received!' });
+  res.json({ success: true, message: 'Message received by BonBon!' });
 });
 
 // Error handling
@@ -34,8 +41,15 @@ app.use((err, req, res, next) => {
 // Start server
 const server = http.createServer(app);
 server.listen(PORT, () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}/`);
-  console.log(`📦 Tech Stack: Node.js + Express + Bootstrap + Tailwind + Rollup`);
+  console.log(`
+🍭 BonBon Server Running 
+`);
+  console.log(`📛 Project: BonBon by Kimberley Hale`);
+  console.log(`💭 Concept: Where the treat is both, and one is the fallback`);
+  console.log(`🚀 Server: http://localhost:${PORT}/`);
+  console.log(`📦 Bundler: Vite (with Rollup fallback)`);
+  console.log(`🛠️  Tech Stack: Node.js + Express + Bootstrap + Tailwind + Vite + Rollup
+`);
 });
 
 module.exports = app;

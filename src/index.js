@@ -1,8 +1,14 @@
-// Main JavaScript entry point for Rollup bundling
-console.log('Playground loaded successfully!');
+// BonBon - Super Library Entry Point
+// Project by Kimberley Hale
+// Where the treat is both, and one is the fallback
+// Combines Vite and Rollup for maximum bundling flexibility
+
+console.log('🍭 BonBon Library Initializing...');
 
 // Bootstrap initialization
 document.addEventListener('DOMContentLoaded', function() {
+  console.log('✨ BonBon loaded successfully!');
+  
   // Initialize Bootstrap components
   const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
   tooltipTriggerList.map(function (tooltipTriggerEl) {
@@ -21,5 +27,13 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-// Export for module usage
-export default {};
+// Export BonBon API
+const BonBon = {
+  version: '1.0.0',
+  bundler: 'Vite + Rollup',
+  creator: 'Kimberley Hale',
+  concept: 'Where the treat is both, and one is the fallback',
+  initialized: true
+};
+
+export default BonBon;
