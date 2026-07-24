@@ -1,14 +1,41 @@
+const express = require('express');
+const path = require('path');
 const http = require('http');
 
-const hostname = 'localhost';
-const port = process.env.PORT || 3000;
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World! Node.js server is running.\n');
+// Middleware
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Routes
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'Server is running', timestamp: new Date() });
 });
+
+app.post('/api/contact', (req, res) => {
+  const { name, email, message } = req.body;
+  console.log('Contact form submission:', { name, email, message });
+  res.json({ success: true, message: 'Message received!' });
+});
+
+// Error handling
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Something went wrong!' });
+});
+
+// Start server
+const server = http.createServer(app);
+server.listen(PORT, () => {
+  console.log(`🚀 Server running at http://localhost:${PORT}/`);
+  console.log(`📦 Tech Stack: Node.js + Express + Bootstrap + Tailwind + Rollup`);
+});
+
+module.exports = app;
